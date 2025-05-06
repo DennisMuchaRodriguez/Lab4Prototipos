@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.GameEvents;
 
 public class Contador : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Contador : MonoBehaviour
     private float elapsedTime = 0f;
     private bool isCounting = true;
 
+    public GameEvent OnGameWinSO;    
+    public GameEvent OnGameWin2SO; 
+    public GameEvent OnGameOverSO;
 
 
     void Update()
@@ -35,21 +39,21 @@ public class Contador : MonoBehaviour
     public void CambiarEscenaGameOver()
     {
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-        //EventManager.Instance.OnGameOver.Invoke();
+        OnGameOverSO.Raise(); 
         SceneManager.LoadScene("GameOver");
     }
+
     public void CambiarEscenaYouwin()
     {
-
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-       // EventManager.Instance.OnGameWin.Invoke();
+        OnGameWinSO.Raise(); 
         SceneManager.LoadScene("YouWin");
     }
+
     public void CambiarEscenaYouwin2()
     {
-
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-       // EventManager.Instance.OnGameWin2.Invoke();
+        OnGameWin2SO.Raise(); 
         SceneManager.LoadScene("Finish");
     }
 }
