@@ -35,21 +35,21 @@ public class Contador : MonoBehaviour
     public void CambiarEscenaGameOver()
     {
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-        EventManager.Instance.OnGameOver.Invoke();
+        //EventManager.Instance.OnGameOver.Invoke();
         SceneManager.LoadScene("GameOver");
     }
     public void CambiarEscenaYouwin()
     {
 
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-        EventManager.Instance.OnGameWin.Invoke();
+       // EventManager.Instance.OnGameWin.Invoke();
         SceneManager.LoadScene("YouWin");
     }
     public void CambiarEscenaYouwin2()
     {
 
         PlayerPrefs.SetFloat("Tiempo", elapsedTime);
-        EventManager.Instance.OnGameWin2.Invoke();
+       // EventManager.Instance.OnGameWin2.Invoke();
         SceneManager.LoadScene("Finish");
     }
 }

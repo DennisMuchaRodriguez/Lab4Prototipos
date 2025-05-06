@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.GameEvents;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,17 +10,18 @@ public class BarraDeVida : MonoBehaviour
     public GameObject[] Lifes;
     public Contador contador;
 
+   
+
     void Start()
     {
         ActivateLives();
-        EventManager.Instance.OnHealthGained.AddListener(HandleHealthGained);
+        EventManager.Instance.OnHealthChanged.Raise(Life);
     }
 
     void HandleHealthGained()
     {
-
         Life++;
-        EventManager.Instance.OnHealthChanged.Invoke(Life);
+        EventManager.Instance.OnHealthChanged.Raise(Life); 
         UpdateLife();
     }
 
@@ -39,8 +41,7 @@ public class BarraDeVida : MonoBehaviour
     public void TakeDamage(int damage)
     {
         Life -= damage;
-        EventManager.Instance.OnHealthChanged.Invoke(Life);
-        EventManager.Instance.OnHealthLost.Invoke();
+        EventManager.Instance.OnHealthChanged.Raise(Life); // Cambiado a Raise
         UpdateLife();
     }
     void ActivateLives()
@@ -53,6 +54,6 @@ public class BarraDeVida : MonoBehaviour
 
     void OnDestroy()
     {
-        EventManager.Instance.OnHealthGained.RemoveListener(HandleHealthGained);    
+        EventManager.Instance.OnHealthChanged.Raise(Life);    
     }
 }

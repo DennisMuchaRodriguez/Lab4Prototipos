@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting;
 public class Puntuje : MonoBehaviour
 {
     private int score = 0;
@@ -10,14 +11,15 @@ public class Puntuje : MonoBehaviour
 
     void Start()
     {
-        EventManager.Instance.OnScoreChanged.AddListener(UpdateScoreText);
+        EventManager.Instance.OnHealthChanged.Raise(score);
         Coin.OnCoinTouched += IncreaseScore;
        
     }
     void IncreaseScore()
     {
         score++;
-        EventManager.Instance.OnScoreChanged.Invoke(score);
+        EventManager.Instance.OnScoreChanged.Raise(score); 
+        UpdateScoreText(score);
     }
     void UpdateScoreText(int newScore)
     {
@@ -28,7 +30,7 @@ public class Puntuje : MonoBehaviour
     }
     void OnDestroy()
     {
-        EventManager.Instance.OnScoreChanged.RemoveListener(UpdateScoreText);
+        EventManager.Instance.OnScoreChanged.Raise(score);
         Coin.OnCoinTouched -= IncreaseScore;
     }
 }

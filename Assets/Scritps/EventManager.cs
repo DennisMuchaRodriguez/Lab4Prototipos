@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scritps.GameEvents;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,13 +9,10 @@ public class EventManager : MonoBehaviour
     public static EventManager Instance;
 
     
-    public UnityEvent OnGameWin;
-    public UnityEvent OnGameWin2;
-    public UnityEvent OnGameOver;
-    public UnityEvent<int> OnScoreChanged;
-    public UnityEvent<int> OnHealthChanged;
-    public UnityEvent OnHealthGained;
-    public UnityEvent OnHealthLost;
+    public GameIntEvent OnHealthChanged;
+
+   
+    public GameIntEvent OnScoreChanged;   
 
     private void Awake()
     {
@@ -23,14 +21,11 @@ public class EventManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-         
-            if (OnGameWin == null) OnGameWin = new UnityEvent();
-            if (OnGameWin2 == null) OnGameWin2 = new UnityEvent();
-            if (OnGameOver == null) OnGameOver = new UnityEvent();
-            if (OnScoreChanged == null) OnScoreChanged = new UnityEvent<int>();
-            if (OnHealthChanged == null) OnHealthChanged = new UnityEvent<int>();
-            if (OnHealthGained == null) OnHealthGained = new UnityEvent();
-            if (OnHealthLost == null) OnHealthLost = new UnityEvent();
+          
+            if (OnHealthChanged == null)
+                OnHealthChanged = ScriptableObject.CreateInstance<GameIntEvent>();
+            if (OnScoreChanged == null)
+                OnScoreChanged = ScriptableObject.CreateInstance<GameIntEvent>();
         }
         else
         {

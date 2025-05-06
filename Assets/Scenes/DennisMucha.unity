@@ -5932,8 +5932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef2e7fcdc32742547957ab99fc8db283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnHealthChanged: {fileID: 0}
-  OnScoreChanged: {fileID: 0}
+  OnHealthChanged: {fileID: 11400000, guid: 21a4b4111e4584747a77d2648d6a1055, type: 2}
+  OnScoreChanged: {fileID: 11400000, guid: 344a02781ce65b84491056bf0c14e76c, type: 2}
 --- !u!4 &991100202
 Transform:
   m_ObjectHideFlags: 0
